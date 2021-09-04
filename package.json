@@ -1,0 +1,33 @@
+{
+  "name": "walabsapi",
+  "version": "1.0.0",
+  "description": "API Laboratório e Exames",
+  "main": "index.js",
+  "author": "Edinilson Nava",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "mongoose": "^6.0.4",
+    "pm2": "^5.1.1",
+    "swagger-autogen": "^2.11.2",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  },
+  "scripts": {
+    "dev": "nodemon ./server.js",
+    "start": "pm2 start server.js --watch --no-daemon --node-args=\"-r \"",
+    "gera-docs": "node ./src/application/docs/swagger.js"
+  },
+  "keywords": [],
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  walabsdbsrv:
+    image: mongo:4.2
+    container_name: walabsdbsrv
+    restart: always
+    ports:
+      - ${DBPORT}:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${DBNAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DBUSER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DBPASS}
+
+  wa-lab-api:
+    image: node:latest
+    container_name: wa-lab-api
+    restart: always
+    env_file:
+     - .env
+    depends_on:
+      - walabsdbsrv
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: yarn start
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
